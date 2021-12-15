@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             d.dismiss();
         }
         if (v == btnAlert) {
-
+            //int a - 0;
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Alert");
             builder.setMessage("Click 'I agree' if we can say you ate\nall the cookies.");
