@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sp;
-
+//int i = 354;
     Dialog d;
     EditText etUserName;
     EditText etPass;
