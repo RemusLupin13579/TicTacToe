@@ -31,4 +31,28 @@
         android:layout_height="100dp"
         android:text="Alert"
         android:textSize="30dp"></Button>
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btnPro"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="progress"
+        android:textSize="30dp"></Button>
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btnDate"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="Date"
+        android:textSize="30dp"></Button>
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btnTime"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:text="Time"
+        android:textSize="30dp"></Button>
 </LinearLayout>
