@@ -12,9 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/berkshire_swash"
         android:text="Dialogs"
-        android:textSize="50sp"
-        android:textColor="#A0C2DA"/>
+        android:textColor="#A0C2DA"
+        android:textSize="50sp" />
 
     <Button
         android:layout_gravity="center"
@@ -55,4 +56,15 @@
         android:layout_height="100dp"
         android:text="Time"
         android:textSize="30dp"></Button>
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Click me more than 2 seconds"
+        android:textColor="#BED9DB"
+        android:textSize="25dp" />
+
 </LinearLayout>
