@@ -4,20 +4,44 @@
 
     <item
         android:id="@+id/action_login"
-        android:title="Login"
+        android:title="Haroim"
         android:orderInCategory="100"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_Register"
-        android:title="Register"
+        android:id="@+id/action_camera"
+        android:title="Camera"
         android:orderInCategory="200"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_exit"
-        android:title="Log out"
+        android:id="@+id/action_call"
+        android:title="Call home"
         android:orderInCategory="300"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_youtube"
+        android:title="Bo Burnham"
+        android:orderInCategory="400"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Email"
+        android:title="Email"
+        android:orderInCategory="500"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_SMS"
+        android:title="SMS"
+        android:orderInCategory="600"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_Map"
+        android:title="Map"
+        android:orderInCategory="700"
         app:showAsAction="never" />
 
 

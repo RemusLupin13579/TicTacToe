@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@drawable/background">
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,42 +18,42 @@
         android:textSize="50sp" />
 
     <Button
-        android:layout_gravity="center"
         android:id="@+id/btnLog"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
         android:text="Log in"
         android:textSize="30dp"></Button>
 
     <Button
-        android:layout_gravity="center"
         android:id="@+id/btnAlert"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
         android:text="Alert"
         android:textSize="30dp"></Button>
 
     <Button
-        android:layout_gravity="center"
         android:id="@+id/btnPro"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
         android:text="progress"
         android:textSize="30dp"></Button>
 
     <Button
-        android:layout_gravity="center"
         android:id="@+id/btnDate"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
         android:text="Date"
         android:textSize="30dp"></Button>
 
     <Button
-        android:layout_gravity="center"
         android:id="@+id/btnTime"
         android:layout_width="300dp"
         android:layout_height="100dp"
+        android:layout_gravity="center"
         android:text="Time"
         android:textSize="30dp"></Button>
 
@@ -66,5 +66,17 @@
         android:text="Click me more than 2 seconds"
         android:textColor="#BED9DB"
         android:textSize="25dp" />
+
+    <EditText
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:id="@+id/etPhone"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:hint="Phone number"
+        android:inputType="phone"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        android:textSize="30dp"></EditText>
 
 </LinearLayout>

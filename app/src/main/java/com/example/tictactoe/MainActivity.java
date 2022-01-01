@@ -1,7 +1,9 @@
 package com.example.tictactoe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,6 +12,9 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -19,21 +24,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import java.util.Calendar;
 
-import static android.os.Build.VERSION_CODES.P;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     SharedPreferences sp;
-    //int i = 354;x`
+    SharedPreferences spPhone;
     Dialog d;
     EditText etUserName;
     EditText etPass;
+    EditText etPhone;
     Button btnCustomLog;
     Button btnLog;
     Button btnAlert;
@@ -43,17 +47,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnTime;
     TextView tv;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv=(TextView)findViewById(R.id.tv);
+        tv = (TextView) findViewById(R.id.tv);
         registerForContextMenu(tv);
 
         btnLog = findViewById(R.id.btnLog);
         btnLog.setOnClickListener(this);
         sp = getSharedPreferences("dialog", 0);
+
+        spPhone = getSharedPreferences("phone", 0);
 
         btnAlert = (Button) findViewById(R.id.btnAlert);
         btnAlert.setOnClickListener(this);
@@ -66,7 +73,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnTime = findViewById(R.id.btnTime);
         btnTime.setOnClickListener(this);
+
+        etPhone = findViewById(R.id.etPhone);
+        String strnum = spPhone.getString("phone", null);
+        if (strnum != null) {
+            etPhone.setText("039366559");
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,14 +126,60 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_login) {
-            Toast.makeText(this, "you selected login", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://snifrevava.wixsite.com/haroim"));
+            startActivity(intent);
             return true;
-        } else if (id == R.id.action_Register) {
-            Toast.makeText(this, "you selected register", Toast.LENGTH_LONG).show();
+
+        } else if (id == R.id.action_camera) {
+            Intent intent = new Intent(this, Camera.class);
+            startActivity(intent);
             return true;
-        } else if (id == R.id.action_exit) {
-            Toast.makeText(this, "you selected exit", Toast.LENGTH_LONG).show();
-            return true;
+
+        } else if (id == R.id.action_call) {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_CALL);
+
+            SharedPreferences.Editor editor = spPhone.edit();
+            editor.putString("phone", etPhone.getText().toString());
+            editor.commit();
+            Toast.makeText(this, "Number saved", Toast.LENGTH_LONG).show();
+
+            String strnum = spPhone.getString("phone", null);
+            Uri data = Uri.parse("tel:" + strnum);
+            intent.setData(data);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                return true;
+            }
+            startActivity(intent);
+        } else if(id == R.id.action_youtube){
+            String videoId = "1Rx_p3NW7gQ";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:"+videoId));
+            intent.putExtra("VIDEO_ID", videoId);
+            startActivity(intent);
+        }
+        else if(id == R.id.action_Email){
+            String []emails = {"brhvangui12@gmail.com"};
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_EMAIL,emails );
+            intent.putExtra(Intent.EXTRA_SUBJECT, "בנוגע לסמים");
+            intent.putExtra(Intent.EXTRA_TEXT, "שלום, קיבלתי את פנייתך ומשלוח מתבצע כרגע לכתובתך. יום טוב.");
+
+            startActivity(Intent.createChooser(intent, "Send Email"));
+        }
+        else if(id == R.id.action_SMS){
+            String message = "Hello World!";
+            String phoneNumber="0585313779";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phoneNumber));
+            intent.putExtra("sms_body", message);
+            startActivity(intent);
+        }
+        else if(id == R.id.action_Map){
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("geo:32.173064364541595, 35.08912552572323"));
+            Intent chooser=Intent.createChooser(intent,"Launch Map");
+            startActivity(chooser);
         }
         return true;
     }
@@ -165,8 +225,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editor.commit();
             Toast.makeText(this, "username password saved", Toast.LENGTH_LONG).show();
 
-            Intent intent=new Intent(this,Welcome.class);
-            intent.putExtra("name",etUserName.getText().toString());
+            Intent intent = new Intent(this, Welcome.class);
+            intent.putExtra("name", etUserName.getText().toString());
             startActivity(intent);
 
             d.dismiss();
