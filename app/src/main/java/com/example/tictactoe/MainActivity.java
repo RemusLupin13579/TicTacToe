@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onContextItemSelected(MenuItem item) {
         // TODO Auto-generated method stub
         if (item.getItemId() == R.id.firstline) {
-            Toast.makeText(this, "You selected first line", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, Permission_Util.class);
+            startActivity(intent);
             return true;
         } else if (item.getItemId() == R.id.secondline) {
             Toast.makeText(this, "You selected second line", Toast.LENGTH_LONG).show();
