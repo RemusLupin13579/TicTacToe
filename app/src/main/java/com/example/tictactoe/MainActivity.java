@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -24,7 +23,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv = (TextView) findViewById(R.id.tv);
+        tv = findViewById(R.id.tv);
         registerForContextMenu(tv);
 
         btnLog = findViewById(R.id.btnLog);
@@ -62,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         spPhone = getSharedPreferences("phone", 0);
 
-        btnAlert = (Button) findViewById(R.id.btnAlert);
+        btnAlert = findViewById(R.id.btnAlert);
         btnAlert.setOnClickListener(this);
 
         btnPro = findViewById(R.id.btnPro);
@@ -77,7 +75,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etPhone = findViewById(R.id.etPhone);
         String strnum = spPhone.getString("phone", null);
         if (strnum != null) {
-            etPhone.setText("039366559");
+            //etPhone.setText("039366559");
+            etPhone.setText(strnum);
         }
     }
 
@@ -96,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater infalter = getMenuInflater();
-        infalter.inflate(R.menu.popup_menu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.popup_menu, menu);
     }
 
     @Override
@@ -112,12 +111,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return true;
         }
         return false;
-    }
-
-    public MenuItem setShowAsAction(Menu menuBtn) {
-        MenuItem menuItem = menuBtn.getItem(2);
-        menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        return menuItem;
     }
 
     @Override
@@ -141,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             SharedPreferences.Editor editor = spPhone.edit();
             editor.putString("phone", etPhone.getText().toString());
-            editor.commit();
+            editor.apply();
             Toast.makeText(this, "Number saved", Toast.LENGTH_LONG).show();
 
             String strnum = spPhone.getString("phone", null);
@@ -194,15 +187,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         d.setContentView(R.layout.custom_layout);
         d.setTitle("Login");
         d.setCancelable(true);
-        etUserName = (EditText) d.findViewById(R.id.etUserName);
-        etPass = (EditText) d.findViewById(R.id.etPassword);
+        etUserName = d.findViewById(R.id.etUserName);
+        etPass = d.findViewById(R.id.etPassword);
 
         if (strname != null && strpass != null) {
             etUserName.setText(strname);
             etPass.setText(strpass);
         }
 
-        btnCustomLog = (Button) d.findViewById(R.id.etCustomLogIn);
+        btnCustomLog = d.findViewById(R.id.etCustomLogIn);
         btnCustomLog.setOnClickListener(this);
         d.show();
     }
@@ -222,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             SharedPreferences.Editor editor = sp.edit();
             editor.putString("username", etUserName.getText().toString());
             editor.putString("pass", etPass.getText().toString());
-            editor.commit();
+            editor.apply();
             Toast.makeText(this, "username password saved", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(this, Welcome.class);
@@ -238,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             builder.setMessage("Click 'I agree' if we can say you ate\nall the cookies.");
             builder.setCancelable(true);
             builder.setPositiveButton("I agree", new HandleAlertDialogListener());
-            builder.setNegativeButton("No, i dont agree", new HandleAlertDialogListener());
+            builder.setNegativeButton("No, i don't agree", new HandleAlertDialogListener());
             AlertDialog dialog = builder.create();
             dialog.show();
         }
